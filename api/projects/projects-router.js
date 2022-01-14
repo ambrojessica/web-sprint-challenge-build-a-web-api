@@ -1,6 +1,5 @@
 // Write your "projects" router here!
 const express = require('express');
-const { restart } = require('nodemon');
 const router = express.Router();
 
 const Projects = require('../projects/projects-model');
@@ -30,20 +29,14 @@ router.post('/', validateProject, (req, res) => {
 });
 
 //put api projects id
-router.put('/:id', (req, res, next) => {
-  if (!req.body.name || !req.body.description || !req.body.completed) {
-    res.status(400).json({
-      message: 'missing required name and body'
+router.put('/:id', validateProject, (req, res, next) => {
+  Projects.update(req.params.id, req.body)
+    .then(updatedProject => {
+      res.status(200).json(updatedProject);
+    })
+    .catch(err => {
+      next(err);
     });
-  } else {
-    Projects.update(req.params.id, req.body)
-      .then(updatedProject => {
-        res.status(200).json(updatedProject);
-      })
-      .catch(err => {
-        next(err);
-      });
-  }
 });
 
 //delete api projects id
