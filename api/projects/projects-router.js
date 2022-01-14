@@ -7,7 +7,7 @@ const Projects = require('../projects/projects-model');
 const { validateProjectId, validateProject } = require('./projects-middleware');
 
 //get api projects
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const project = await Projects.get();
     res.status(200).json(project);
@@ -30,10 +30,38 @@ router.post('/', validateProject, (req, res) => {
 });
 
 //put api projects id
-router.put('/:id', validateProjectId, async (req, res) => {
+router.put('/:id', (req, res, next) => {
+  if (!req.body.name || !req.body.description || !req.body.completed) {
+    res.status(400).json({
+      message: 'missing required name and body'
+    });
+  } else {
+    Projects.update(req.params.id, req.body)
+      .then(updatedProject => {
+        res.status(200).json(updatedProject);
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+});
+
+//delete api projects id
+router.delete('/:id', validateProjectId, async (req, res, next) => {
   try {
-    const updatedProject = await Projects.update(req.params.id, req.body);
-    res.status(200).json(updatedProject);
+    await Projects.remove(req.params.id);
+    res.json('deleted');
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
+//get api projects id actions
+router.get('/:id/actions', validateProjectId, async (req, res, next) => {
+  try {
+    const action = await Projects.getProjectActions(req.params.id);
+    res.json(action);
   }
   catch (err) {
     next(err);

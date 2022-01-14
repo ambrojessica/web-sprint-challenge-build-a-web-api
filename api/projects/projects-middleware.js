@@ -24,7 +24,7 @@ function validateProject(req, res, next) {
   if (!req.body.name || !req.body.description || !req.body.completed) {
     next({
       status: 400,
-      message: 'required name and description'
+      message: 'missing required name and description'
     });
   } else {
     next();
