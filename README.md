@@ -147,7 +147,23 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+Some of the core features of Node.js is that it uses JavaScript for client and server, this is helpful because there is less misinterpretation of code with the client and server. Node.js is very useful because we are allowed to use different services within Node and we receive data or response times all from multiple source points. 
+
+Some of the core features of Express are that we can build web applications or single page applications, it is a very organized and flexible api. Express is useful because we are able to use middleware, routing and routers and we are able to create api's.
+
 1. Understand and explain the use of Middleware.
+
+Middleware are functions that extend software, as I mentioned before middleware's are used in Express and it lengthens that functionality of Express. When writing these middleware's it is important about the order, because that is how the code gets executed. There are different types of middleware however, it is slightly more beneficial to create your own because we are able to keep our code dry and one middleware can be used in many different routes in our code. 
+
 1. The basic principles of the REST architectural style.
+
+REST allows to build scalable and simple web applications, the basic principles is that everything you interact with is a resource this means it needs to receive that same data each time and that the format wont change. It can have multiple representations, this means the client app and server are able to actualize without depending on one another. The next principle is that communication happens over stateless protocol, this means that every request made the server will treat it as new. Lastly, these resources are happened through HTTP methods, this means we are able to use get, post, put, delete. 
+
 1. Understand and explain the use of Express Routers.
+
+Express routers help us make our code more concise and efficient because we are allowed to break these applications smaller and grouped together. We are able to use CRUD respectively throughout these functions. However, to create an Express router we must use 'express.Router()' in order to invoke the router function. 
+
 1. Describe tooling used to manually test the correctness of an API.
+
+There are different types of tooling to test API's, some of the ones we used were HTTPie, Postman or Insomnia. These are helpful because they will let us know if we are getting the desired response, we are also able to make changes if needed add and examine the data. 
