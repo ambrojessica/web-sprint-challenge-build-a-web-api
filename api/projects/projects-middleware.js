@@ -21,7 +21,7 @@ async function validateProjectId(req, res, next) {
 }
 
 function validateProject(req, res, next) {
-  if (!req.body.name || !req.body.description || !req.body.completed) {
+  if (!req.body.name || !req.body.description || req.body.completed === undefined) {
     next({
       status: 400,
       message: 'missing required name and description'

@@ -29,14 +29,16 @@ router.post('/', validateProject, (req, res) => {
 });
 
 //put api projects id
-router.put('/:id', validateProject, (req, res, next) => {
-  Projects.update(req.params.id, req.body)
-    .then(updatedProject => {
-      res.status(200).json(updatedProject);
-    })
-    .catch(err => {
-      next(err);
-    });
+router.put('/:id', validateProject, validateProjectId, async (req, res, next) => {
+  const { name, description, completed } = req.body;
+
+  try {
+    const updatedProject = await Projects.update(req.params.id, { name, description, completed });
+    res.json(updatedProject);
+  }
+  catch (err) {
+    next(err);
+  }
 });
 
 //delete api projects id
